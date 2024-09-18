@@ -1,49 +1,45 @@
+<script setup lang="ts">
+import type { ArrivalItem } from '../types/ArrivalType'
+import { defineProps, defineEmits } from 'vue'
+
+interface Props {
+  newArrivals: Array<ArrivalItem>
+}
+defineProps<Props>()
+
+const emit = defineEmits(['showDetails'])
+
+function showDetails(item: object): void {
+  emit('showDetails', item)
+}
+</script>
 <template>
   <section class="arrivals">
     <div class="container">
       <h2 class="arrivals__tagline">Popular Arrivals</h2>
       <div class="arrivals__models">
-        <div class="arrivals__items">
+        <div v-for="item in newArrivals" :key="item.id" class="arrivals__items">
           <div class="wrapper">
             <img src="../assets/img/nike2.png" alt="" />
             <div class="arrivals__details">
-              <a href="#">View Details</a>
+              <a @click="showDetails(item)">View Details</a>
             </div>
           </div>
-          <h3 class="arrivals__name">Nike shoes<span> Shop Outdoors</span></h3>
-          <p class="arrivals__price">$ 125</p>
-        </div>
-        <div class="arrivals__items">
-          <div class="wrapper">
-            <img src="../assets/img/nike3.png" alt="" />
-            <div class="arrivals__details">
-              <a href="#">View Details</a>
-            </div>
-          </div>
-          <h3 class="arrivals__name">Nike shoes<span> Shop Outdoors</span></h3>
-          <p class="arrivals__price">$ 260</p>
-        </div>
-        <div class="arrivals__items">
-          <div class="wrapper">
-            <img src="../assets/img/nike4.png" alt="" />
-            <div class="arrivals__details">
-              <a href="#">View Details</a>
-            </div>
-          </div>
-          <h3 class="arrivals__name">Nike shoes<span> Shop Outdoors</span></h3>
-          <p class="arrivals__price">$ 145</p>
-        </div>
-        <div class="arrivals__items">
-          <div class="wrapper">
-            <img src="../assets/img/nike5.png" alt="" />
-            <div class="arrivals__details">
-              <a href="#">View Details</a>
-            </div>
-          </div>
-          <h3 class="arrivals__name">Nike shoes<span> Shop Outdoors</span></h3>
-          <p class="arrivals__price">$ 350</p>
+          <h3 class="arrivals__name">
+            {{ item.shoesName }}
+            <span v-if="item.isOutdoors"> Shop Outdoors</span>
+          </h3>
+          <p v-if="!item.isOutdoors" class="arrivals__price">
+            {{ item.price }}
+          </p>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.arrivals__items {
+  margin-left: 8px;
+}
+</style>
