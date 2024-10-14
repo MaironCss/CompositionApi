@@ -9,7 +9,7 @@ defineProps<Props>()
 
 const emit = defineEmits(['showDetails'])
 
-function showDetails(item: object): void {
+function showDetails(item: ArrivalItem): void {
   emit('showDetails', item)
 }
 </script>

@@ -9,11 +9,12 @@ import thoughtSection from './components/thoughtSection.vue'
 import blogSection from './components/blogSection.vue'
 import contactSection from './components/contactSection.vue'
 import { arrivalsArr } from './constants'
+import type { ArrivalItem } from './types/ArrivalType'
 import { ref } from 'vue'
 
 let arrivals = ref(arrivalsArr)
 
-function showDetails(item: Event): void {
+function showDetails(item: ArrivalItem): void {
   console.log('item', item)
 }
 </script>
